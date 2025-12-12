@@ -97,28 +97,25 @@ const GITEXSection = forwardRef((_props, gitexRef) => {
           className="text-center mb-6 md:mb-10"
           id="gitex-conference-header"
         >
-          <div
-            className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 rounded-full mb-6 md:mb-8 shadow-lg"
-            style={{ backgroundColor: "#1e40af" }}
-          >
-            <Users className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-            <span className="font-bold text-white text-xs sm:text-xs tracking-wide">
+          <div className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 rounded-full mb-8 glass-card-hover shadow-2xl border-2 border-blue-500/30">
+            <Users className="w-5 h-5 text-blue-400" />
+            <span className="font-bold text-white text-xs tracking-wide">
               SPECIAL FEATURE
             </span>
-            <span className="text-white/70 hidden sm:inline">•</span>
-            <span className="font-semibold text-white text-xs sm:text-xs">
+            <span className="text-white/50">•</span>
+            <span className="font-semibold text-blue-300 text-xs">
               GITEX CONFERENCE
             </span>
           </div>
 
-          <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black text-black leading-tight mb-4 md:mb-6 px-2">
+          <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-4 md:mb-6 px-2">
             TOLARAM PARTICIPATES IN{" "}
-            <span style={{ color: "#1e40af" }} className="block sm:inline">
+            <span className="text-blue-400 block sm:inline">
               GITEX CONFERENCE
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-gray-700 max-w-4xl mx-auto leading-relaxed text-center px-4">
+          <p className="text-sm sm:text-base text-gray-300 max-w-4xl mx-auto leading-relaxed text-center px-4">
             On September 3rd and 4th, 2025, Tolaram attended the landmark GITEX
             conference, held in Abuja and at Lagos's Eko Hotel. As the
             first-ever edition in Nigeria and one of the largest tech event in
@@ -130,52 +127,46 @@ const GITEXSection = forwardRef((_props, gitexRef) => {
 
         {/* Conference Details */}
         <motion.div variants={itemVariants} className="mb-8 md:mb-12">
-          <div className="bg-white rounded-2xl md:rounded-3xl shadow-lg md:shadow-2xl border border-blue-100 overflow-hidden">
+          <div className="glass-card-premium overflow-hidden">
             <div className="px-4 sm:px-6 md:px-8 py-6 md:py-8">
               {/* Event Info */}
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="flex items-start gap-4">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0"
-                    style={{ backgroundColor: "#1e40af" }}
-                  >
-                    <Calendar className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center shadow-lg flex-shrink-0 border border-blue-500/30">
+                    <Calendar className="w-6 h-6 text-blue-400" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 text-lg mb-2">
+                    <h4 className="font-bold text-white text-lg mb-2">
                       Event Dates
                     </h4>
-                    <p className="text-blue-600 font-semibold">
+                    <p className="text-blue-400 font-semibold">
                       3rd and 4th September 2025
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0"
-                    style={{ backgroundColor: "#1e40af" }}
-                  >
-                    <MapPin className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center shadow-lg flex-shrink-0 border border-blue-500/30">
+                    <MapPin className="w-6 h-6 text-blue-400" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 text-lg mb-2">
+                    <h4 className="font-bold text-white text-lg mb-2">
                       Locations
                     </h4>
-                    <p className="text-gray-700">Abuja and Eko Hotel, Lagos</p>
+                    <p className="text-gray-300">Abuja and Eko Hotel, Lagos</p>
                   </div>
                 </div>
               </div>
 
               {/* Impact Statement */}
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-200 mb-8">
+              <div className="glass-card p-6 rounded-2xl border border-blue-500/30 mb-8">
                 <div className="flex items-start gap-3 mb-3">
-                  <Rocket className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
-                  <h4 className="text-xl font-bold text-gray-900">
+                  <Rocket className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
+                  <h4 className="text-xl font-bold text-white">
                     Strategic Impact
                   </h4>
                 </div>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-300 leading-relaxed">
                   Our presence at GITEX is a strategic move to accelerate our
                   digital transformation, integrate global innovations, and
                   build partnerships that will redefine our future operations.
@@ -185,8 +176,7 @@ const GITEXSection = forwardRef((_props, gitexRef) => {
               <div className="col-span-1 sm:col-span-2 flex justify-center my-5">
                 <button
                   onClick={() => toggleSection("workshopsAttended")}
-                  className="inline-flex items-center gap-2 px-4 py-2 text-white rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90"
-                  style={{ backgroundColor: "#1e40af" }}
+                  className="inline-flex items-center gap-2 px-6 py-3 text-white rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90 glass-card border border-blue-500/30 hover:border-blue-400/50"
                 >
                   {expandedSections.workshopsAttended ? (
                     <>
@@ -212,13 +202,10 @@ const GITEXSection = forwardRef((_props, gitexRef) => {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="flex items-center gap-3 mb-4">
-                      <div
-                        className="w-10 h-10 rounded-lg flex items-center justify-center shadow-md"
-                        style={{ backgroundColor: "#1e40af" }}
-                      >
-                        <Lightbulb className="w-5 h-5 text-white" />
+                      <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center shadow-md border border-blue-500/30">
+                        <Lightbulb className="w-5 h-5 text-blue-400" />
                       </div>
-                      <h4 className="text-xl font-bold text-gray-900">
+                      <h4 className="text-xl font-bold text-white">
                         Workshops Attended
                       </h4>
                     </div>
@@ -226,14 +213,14 @@ const GITEXSection = forwardRef((_props, gitexRef) => {
                       {workshops.map((workshop, index) => (
                         <div
                           key={index}
-                          className="flex items-start gap-3 p-4 bg-blue-50 rounded-xl border border-blue-100"
+                          className="flex items-start gap-3 p-4 glass-card rounded-xl border border-blue-500/20"
                         >
-                          <div className="w-6 h-6 rounded-full bg-blue-200 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <span className="text-blue-800 font-bold text-sm">
+                          <div className="w-6 h-6 rounded-full bg-blue-500/30 flex items-center justify-center flex-shrink-0 mt-0.5 border border-blue-400/30">
+                            <span className="text-blue-300 font-bold text-sm">
                               {index + 1}
                             </span>
                           </div>
-                          <p className="text-gray-700 leading-relaxed text-sm">
+                          <p className="text-gray-300 leading-relaxed text-sm">
                             {workshop}
                           </p>
                         </div>
@@ -257,13 +244,13 @@ const GITEXSection = forwardRef((_props, gitexRef) => {
           </div>
         </motion.div>
 
-        {/* Photo Splash Section */}
+        {/* Photo Splash Section - Redesigned */}
         <motion.div variants={itemVariants} className="mb-8">
-          <div className="text-center mb-6">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
               Conference Highlights
             </h3>
-            <p className="text-gray-600">Capturing moments from GITEX 2025</p>
+            <p className="text-gray-400">Capturing moments from GITEX 2025</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -271,22 +258,29 @@ const GITEXSection = forwardRef((_props, gitexRef) => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden border border-blue-100 hover:shadow-xl transition-shadow duration-300"
+                className="glass-card-premium overflow-hidden group cursor-pointer"
               >
-                <div className="aspect-video overflow-hidden bg-gray-100">
+                <div className="aspect-video overflow-hidden relative">
                   <img
                     src={photo.src}
                     alt={`GITEX Conference ${index + 1}`}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                </div>
-                <div className="p-4">
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    {photo.caption}
-                  </p>
+                  <div className="absolute inset-0 image-overlay-gradient" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                    <p className="text-sm text-white font-medium leading-relaxed">
+                      {photo.caption}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Pagination Dots */}
+          <div className="pagination-dots">
+            <div className="pagination-dot active"></div>
+            <div className="pagination-dot"></div>
           </div>
         </motion.div>
       </motion.div>

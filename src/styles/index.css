@@ -191,6 +191,52 @@
     @apply glass-card hover:border-white/20 hover:shadow-2xl hover:shadow-red-500/20;
   }
 
+  .glass-card-premium {
+    @apply bg-white/10 backdrop-blur-2xl border border-white/20;
+    @apply rounded-3xl transition-all duration-300;
+    box-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-card-premium:hover {
+    @apply bg-white/15 border-white/30;
+    box-shadow: 0 25px 70px 0 rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+  }
+
+  .image-overlay-gradient {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+  }
+
+  .card-image-container {
+    @apply relative overflow-hidden rounded-2xl;
+  }
+
+  .card-image-container img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+
+  .card-image-container:hover img {
+    @apply scale-110;
+  }
+
+  .pagination-dots {
+    @apply flex gap-2 justify-center mt-6;
+  }
+
+  .pagination-dot {
+    @apply w-2 h-2 rounded-full bg-white/30 transition-all duration-300 cursor-pointer;
+  }
+
+  .pagination-dot:hover {
+    @apply bg-white/50;
+  }
+
+  .pagination-dot.active {
+    @apply bg-white w-8;
+  }
+
   .burgundy-gradient {
     background: linear-gradient(135deg, #1a0a0e 0%, #2d1215 50%, #4a1e25 100%);
   }

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./styles/index.css";
 import { motion, AnimatePresence } from "framer-motion";
 import Navigation from "./components/layout/Navigation";
+import Footer from "./components/layout/Footer";
 import HeroSection from "./chapters/HeroSection";
 
 import SAPImplementationSection from "./chapters/SAPImplementationSection";
@@ -1009,9 +1010,11 @@ function App() {
           <SalesSection ref={salesRef} />
           <CertificationsAndAchievementsSection ref={achievementsRef} />
         </main>
+
+        <Footer />
       </div>
 
-      <footer className=" hidden bg-gradient-to-br from-gray-100 to-gray-200 border-t border-border/50 py-16 relative overflow-hidden">
+      <footer className="hidden bg-gradient-to-br from-gray-100 to-gray-200 border-t border-border/50 py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-white/60" />
         <div className="relative z-10 container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
