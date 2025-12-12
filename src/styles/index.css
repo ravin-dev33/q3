@@ -1,0 +1,445 @@
+/* Simplified font system: Inter (primary), Outfit (display), JetBrains Mono (mono) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--background: 0 0% 98%;
+		--foreground: 222 84% 4.9%;
+		--card: 0 0% 96%;
+		--card-foreground: 222 84% 4.9%;
+		--popover: 0 0% 98%;
+		--popover-foreground: 222 84% 4.9%;
+		--primary: 222 84% 4.9%;
+		--primary-foreground: 0 0% 98%;
+		--secondary: 210 40% 96%;
+		--secondary-foreground: 222 84% 4.9%;
+		--muted: 210 40% 94%;
+		--muted-foreground: 215.4 16.3% 46.9%;
+		--accent: 355 100% 44%;
+		--accent-foreground: 222 84% 4.9%;
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 214.3 31.8% 91.4%;
+		--input: 214.3 31.8% 91.4%;
+		--ring: 355 100% 44%;
+		--radius: 0.75rem;
+		--chart-1: 355 100% 44%;
+		--chart-2: 30 80% 55%;
+		--chart-3: 20 80% 55%;
+		--chart-4: 200 80% 60%;
+		--chart-5: 190 80% 60%;
+		--hero-bg: 220 26% 14%;
+		--hero-foreground: 0 0% 98%;
+		--midnight-blue: 220 26% 14%;
+		--midnight-blue-foreground: 0 0% 98%;
+
+		/* Standardized chapter colors for consistency */
+		--sap-color: #f59e0b;
+		--it-color: #3b82f6;
+		--marketing-color: #8b5cf6;
+		--manufacturing-color: #e4002b;
+		--finance-color: #10b981;
+		--logistics-color: #f97316;
+		--sales-color: #6366f1;
+		--gitex-color: #1e40af;
+
+		/* Spacing scale based on 8px grid */
+		--spacing-xs: 0.5rem;   /* 8px */
+		--spacing-sm: 1rem;     /* 16px */
+		--spacing-md: 1.5rem;   /* 24px */
+		--spacing-lg: 2rem;     /* 32px */
+		--spacing-xl: 3rem;     /* 48px */
+		--spacing-2xl: 4rem;    /* 64px */
+		--spacing-3xl: 6rem;    /* 96px */
+	}
+
+	.dark {
+		--background: 0 0% 3.9%;
+		--foreground: 0 0% 98%;
+		--card: 0 0% 5%;
+		--card-foreground: 0 0% 98%;
+		--popover: 0 0% 4%;
+		--popover-foreground: 0 0% 98%;
+		--primary: 0 0% 98%;
+		--primary-foreground: 0 0% 9%;
+		--secondary: 0 0% 14.9%;
+		--secondary-foreground: 0 0% 98%;
+		--muted: 0 0% 35%;
+		--muted-foreground: 0 0% 90%;
+		--accent: 0 0% 14.9%;
+		--accent-foreground: 0 0% 98%;
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 0 0% 30%;
+		--input: 0 0% 30%;
+		--ring: 0 0% 83.1%;
+		--chart-1: 220 70% 50%;
+		--chart-2: 160 60% 45%;
+		--chart-3: 30 80% 55%;
+		--chart-4: 280 65% 60%;
+		--chart-5: 340 75% 55%;
+	}
+  .theme {
+		--animate-marquee: marquee var(--duration) infinite linear;
+		--animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+		--animate-grid: grid 15s linear infinite;
+	}
+}
+
+
+@keyframes spin-reverse {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(-360deg);
+	}
+}
+
+.spinner {
+	animation: spin-reverse 1s linear infinite;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+	}
+  body {
+    @apply bg-background text-foreground;
+	}
+
+	/* Improved focus states for accessibility */
+	*:focus-visible {
+		outline: 2px solid hsl(var(--accent));
+		outline-offset: 2px;
+		transition: outline-offset 0.2s ease;
+	}
+
+	*:focus-visible:active {
+		outline-offset: 4px;
+	}
+}
+
+@layer base {
+  * {
+    @apply border-border;
+	}
+  body {
+    @apply bg-background text-foreground font-inter;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+	}
+  
+  /* Add scroll margin to sections to account for fixed navigation */
+  #data-sync,
+  #kpi-visualization,
+  #industry-40,
+  #ai-manufacturing,
+  #process-automation {
+    scroll-margin-top: 100px;
+  }
+}
+
+/* Newsletter typography classes */
+@layer components {
+  .font-outfit {
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .newsletter-heading {
+    @apply font-outfit font-bold tracking-wide;
+  }
+
+  .newsletter-subheading {
+    @apply font-inter font-medium tracking-wide;
+  }
+
+  .newsletter-body {
+    @apply font-inter font-normal leading-relaxed;
+  }
+
+  .newsletter-mono {
+    @apply font-mono text-sm tracking-wider;
+  }
+
+  .newsletter-card {
+    @apply bg-card/50 border border-border/50 backdrop-blur-sm;
+    @apply hover:bg-card/70 transition-all duration-300;
+  }
+
+  .hero-card {
+    @apply bg-white/20 border border-sky-300/30 backdrop-blur-sm;
+    @apply hover:bg-white/30 transition-all duration-300;
+  }
+
+  .futuristic-grid {
+    background-image: 
+      linear-gradient(rgba(228, 0, 43, 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(228, 0, 43, 0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: grid-move 20s linear infinite;
+  }
+
+  .midnight-grid {
+    background-image: 
+      linear-gradient(rgba(100, 149, 237, 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(100, 149, 237, 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: grid-move 25s linear infinite;
+  }
+
+  @keyframes grid-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 40px 40px; }
+  }
+
+  .particle-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(120deg); }
+    66% { transform: translateY(10px) rotate(240deg); }
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-glow {
+    from {
+      opacity: 0.7;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .midnight-glow {
+    animation: midnight-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes midnight-glow {
+    from {
+      opacity: 0.8;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .data-stream {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(228, 0, 43, 0.15),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: data-stream 3s linear infinite;
+  }
+
+  .midnight-stream {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(100, 149, 237, 0.3),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: data-stream 3s linear infinite;
+  }
+
+  @keyframes data-stream {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .tech-border {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tech-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(228, 0, 43, 0.4),
+      transparent
+    );
+    animation: tech-scan 2s linear infinite;
+  }
+
+  .midnight-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(100, 149, 237, 0.7),
+      transparent
+    );
+    animation: tech-scan 2s linear infinite;
+  }
+
+  @keyframes tech-scan {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  .hologram-text {
+    background: linear-gradient(
+      45deg,
+      rgba(228, 0, 43, 0.9),
+      rgba(255, 82, 107, 0.9),
+      rgba(228, 0, 43, 0.9)
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: hologram-shine 3s ease-in-out infinite;
+  }
+
+  .midnight-hologram {
+    background: linear-gradient(
+      45deg,
+      rgba(100, 149, 237, 0.9),
+      rgba(135, 206, 235, 0.9),
+      rgba(100, 149, 237, 0.9)
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: hologram-shine 3s ease-in-out infinite;
+  }
+
+  @keyframes hologram-shine {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .newsletter-glow {
+    @apply relative;
+  }
+
+  .newsletter-glow::before {
+    @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300;
+    content: '';
+    background: linear-gradient(135deg, hsl(var(--accent) / 0.1), transparent);
+  }
+
+  .newsletter-glow:hover::before {
+    @apply opacity-100;
+  }
+
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent;
+  }
+
+  .border-gradient {
+    @apply relative;
+  }
+
+  .border-gradient::before {
+    @apply absolute inset-0 rounded-xl p-px bg-gradient-to-r from-accent/20 to-transparent;
+    content: '';
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+  }
+}
+
+@theme inline {
+  @keyframes marquee {
+  from {
+    transform: translateX(0);
+		}
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+		}
+	}
+  @keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+		}
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+		}
+	}
+  @keyframes grid {
+  0% {
+    transform: translateY(-50%);
+		}
+  100% {
+    transform: translateY(0);
+		}
+	}
+  @keyframes grid {
+  0% {
+    transform: translateY(-50%);
+		}
+  100% {
+    transform: translateY(0);
+		}
+	}
+}
+
+@layer base {
+  * {
+    @apply border-border;
+	}
+  body {
+    @apply bg-background text-foreground;
+	}
+
+	/* Smooth scrolling with better performance */
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* Respect user's motion preferences */
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+
+	/* Improved text rendering */
+	body {
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
+	}
+}
