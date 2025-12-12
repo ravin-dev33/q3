@@ -266,13 +266,17 @@ function App() {
   const achievementsRef = useRef(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50/30 via-white to-red-50/30 relative">
-      {/* Subtle animated background patterns */}
+    <div className="min-h-screen dark-burgundy-gradient relative">
+      {/* Animated background patterns with burgundy/red theme */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-red-200/20 to-transparent rounded-full blur-3xl animate-pulse-glow"></div>
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-red-600/20 via-red-500/10 to-transparent rounded-full blur-3xl animate-pulse-glow"></div>
         <div
-          className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-orange-200/20 to-transparent rounded-full blur-3xl"
+          className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-red-700/15 via-rose-600/10 to-transparent rounded-full blur-3xl animate-pulse-glow"
           style={{ animationDelay: "2s" }}
+        ></div>
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-red-900/10 to-transparent rounded-full blur-3xl"
+          style={{ animationDelay: "4s" }}
         ></div>
       </div>
       {/* Skip link for keyboard accessibility */}
@@ -318,11 +322,11 @@ function App() {
             className="text-center h-auto w-64"
           >
             <div
-              className={`bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 w-full rounded-2xl border-2 ${
+              className={`glass-card-hover w-full rounded-2xl border-2 ${
                 activeChapter === "sap-implementation"
-                  ? "p-6 border-amber-400 shadow-2xl shadow-amber-500/20"
-                  : "py-4 px-6 cursor-pointer border-gray-700 hover:border-amber-400/50 shadow-xl"
-              } flex flex-col backdrop-blur-xl transition-all duration-300`}
+                  ? "p-6 border-amber-400/50 shadow-2xl shadow-amber-500/30 bg-white/10"
+                  : "py-4 px-6 cursor-pointer border-white/10 hover:border-amber-400/30 bg-white/5"
+              } flex flex-col transition-all duration-300`}
               onClick={() =>
                 activeChapter !== "sap-implementation" &&
                 scrollToSection("sap-implementation-header")
@@ -449,11 +453,11 @@ function App() {
             className="text-center h-auto w-64"
           >
             <div
-              className={`bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 w-full rounded-2xl border-2 ${
+              className={`glass-card-hover w-full rounded-2xl border-2 ${
                 activeChapter === "gitex-conference"
-                  ? "p-6 border-blue-400 shadow-2xl shadow-blue-500/20"
-                  : "py-4 px-6 cursor-pointer border-gray-700 hover:border-blue-400/50 shadow-xl"
-              } flex flex-col backdrop-blur-xl transition-all duration-300`}
+                  ? "p-6 border-blue-400/50 shadow-2xl shadow-blue-500/30 bg-white/10"
+                  : "py-4 px-6 cursor-pointer border-white/10 hover:border-blue-400/30 bg-white/5"
+              } flex flex-col transition-all duration-300`}
               onClick={() =>
                 activeChapter !== "gitex-conference" &&
                 scrollToSection("gitex-conference-header")
@@ -580,11 +584,11 @@ function App() {
             className="text-center h-auto w-64"
           >
             <div
-              className={`bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 w-full rounded-2xl border-2 ${
+              className={`glass-card-hover w-full rounded-2xl border-2 ${
                 activeChapter === "it-infrastructure"
-                  ? "p-4 border-cyan-400 shadow-2xl shadow-cyan-500/20"
-                  : "py-4 px-6 cursor-pointer border-gray-700 hover:border-cyan-400/50 shadow-xl"
-              } flex flex-col backdrop-blur-xl transition-all duration-300`}
+                  ? "p-4 border-cyan-400/50 shadow-2xl shadow-cyan-500/30 bg-white/10"
+                  : "py-4 px-6 cursor-pointer border-white/10 hover:border-cyan-400/30 bg-white/5"
+              } flex flex-col transition-all duration-300`}
               onClick={() =>
                 activeChapter !== "it-infrastructure" &&
                 scrollToSection("it-infrastructure-header")
@@ -629,11 +633,11 @@ function App() {
             className="text-center h-auto w-64"
           >
             <div
-              className={`bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 w-full rounded-2xl border-2 ${
+              className={`glass-card-hover w-full rounded-2xl border-2 ${
                 activeChapter === "marketing"
-                  ? "p-4 border-purple-400 shadow-2xl shadow-purple-500/20"
-                  : "py-4 px-6 cursor-pointer border-gray-700 hover:border-purple-400/50 shadow-xl"
-              } flex flex-col backdrop-blur-xl transition-all duration-300`}
+                  ? "p-4 border-purple-400/50 shadow-2xl shadow-purple-500/30 bg-white/10"
+                  : "py-4 px-6 cursor-pointer border-white/10 hover:border-purple-400/30 bg-white/5"
+              } flex flex-col transition-all duration-300`}
               onClick={() =>
                 activeChapter !== "marketing" &&
                 scrollToSection("marketing-header")
@@ -760,11 +764,11 @@ function App() {
             className="text-center h-auto w-64"
           >
             <div
-              className={`bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 w-full rounded-2xl border-2 ${
+              className={`glass-card-hover w-full rounded-2xl border-2 ${
                 activeChapter === "manufacturing"
-                  ? "p-6 border-red-400 shadow-2xl shadow-red-500/20"
-                  : "py-4 px-6 cursor-pointer border-gray-700 hover:border-red-400/50 shadow-xl"
-              } flex flex-col backdrop-blur-xl transition-all duration-300`}
+                  ? "p-6 border-red-400/50 shadow-2xl shadow-red-500/30 bg-white/10"
+                  : "py-4 px-6 cursor-pointer border-white/10 hover:border-red-400/30 bg-white/5"
+              } flex flex-col transition-all duration-300`}
               onClick={() => {
                 if (activeChapter !== "manufacturing") {
                   scrollToSection("manufacturing-header");
@@ -811,11 +815,11 @@ function App() {
             className="text-center h-auto w-64"
           >
             <div
-              className={`bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 w-full rounded-2xl border-2 ${
+              className={`glass-card-hover w-full rounded-2xl border-2 ${
                 activeChapter === "finance-automations"
-                  ? "p-4 border-emerald-400 shadow-2xl shadow-emerald-500/20"
-                  : "py-4 px-6 cursor-pointer border-gray-700 hover:border-emerald-400/50 shadow-xl"
-              } flex flex-col backdrop-blur-xl transition-all duration-300`}
+                  ? "p-4 border-emerald-400/50 shadow-2xl shadow-emerald-500/30 bg-white/10"
+                  : "py-4 px-6 cursor-pointer border-white/10 hover:border-emerald-400/30 bg-white/5"
+              } flex flex-col transition-all duration-300`}
               onClick={() =>
                 activeChapter !== "finance-automations" &&
                 scrollToSection("finance-automations-header")
@@ -860,11 +864,11 @@ function App() {
             className="text-center h-auto w-64"
           >
             <div
-              className={`bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 w-full rounded-2xl border-2 ${
+              className={`glass-card-hover w-full rounded-2xl border-2 ${
                 activeChapter === "logistics"
-                  ? "p-4 border-orange-400 shadow-2xl shadow-orange-500/20"
-                  : "py-4 px-6 cursor-pointer border-gray-700 hover:border-orange-400/50 shadow-xl"
-              } flex flex-col backdrop-blur-xl transition-all duration-300`}
+                  ? "p-4 border-orange-400/50 shadow-2xl shadow-orange-500/30 bg-white/10"
+                  : "py-4 px-6 cursor-pointer border-white/10 hover:border-orange-400/30 bg-white/5"
+              } flex flex-col transition-all duration-300`}
               onClick={() =>
                 activeChapter !== "logistics" &&
                 scrollToSection("logistics-header")
@@ -909,11 +913,11 @@ function App() {
             className="text-center h-auto w-64"
           >
             <div
-              className={`bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 w-full rounded-2xl border-2 ${
+              className={`glass-card-hover w-full rounded-2xl border-2 ${
                 activeChapter === "sales"
-                  ? "p-4 border-indigo-400 shadow-2xl shadow-indigo-500/20"
-                  : "py-4 px-6 cursor-pointer border-gray-700 hover:border-indigo-400/50 shadow-xl"
-              } flex flex-col backdrop-blur-xl transition-all duration-300`}
+                  ? "p-4 border-indigo-400/50 shadow-2xl shadow-indigo-500/30 bg-white/10"
+                  : "py-4 px-6 cursor-pointer border-white/10 hover:border-indigo-400/30 bg-white/5"
+              } flex flex-col transition-all duration-300`}
               onClick={() =>
                 activeChapter !== "sales" && scrollToSection("sales-header")
               }
@@ -957,11 +961,11 @@ function App() {
             className="text-center h-auto w-64"
           >
             <div
-              className={`bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 w-full rounded-2xl border-2 ${
+              className={`glass-card-hover w-full rounded-2xl border-2 ${
                 activeChapter === "achievements"
-                  ? "p-4 border-indigo-400 shadow-2xl shadow-indigo-500/20"
-                  : "py-4 px-6 cursor-pointer border-gray-700 hover:border-indigo-400/50 shadow-xl"
-              } flex flex-col backdrop-blur-xl transition-all duration-300`}
+                  ? "p-4 border-indigo-400/50 shadow-2xl shadow-indigo-500/30 bg-white/10"
+                  : "py-4 px-6 cursor-pointer border-white/10 hover:border-indigo-400/30 bg-white/5"
+              } flex flex-col transition-all duration-300`}
               onClick={() =>
                 activeChapter !== "achievements" &&
                 scrollToSection("achievements-header")

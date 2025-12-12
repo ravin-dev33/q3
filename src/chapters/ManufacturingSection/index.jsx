@@ -88,7 +88,7 @@ const ManufacturingSection = forwardRef((_props, manufacturingRef) => {
     <section
       ref={manufacturingRef}
       id="manufacturing"
-      className="relative py-16  overflow-hidden px-6"
+      className="relative py-16 overflow-hidden px-6"
     >
       <motion.div
         ref={ref}
@@ -103,25 +103,22 @@ const ManufacturingSection = forwardRef((_props, manufacturingRef) => {
           className="text-center mb-10"
           id="manufacturing-header"
         >
-          <div
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-full mb-8 shadow-lg"
-            style={{ backgroundColor: "#1e40af" }}
-          >
-            <Factory className="w-5 h-5 text-white" />
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full mb-8 glass-card-hover shadow-2xl border-2 border-blue-500/30">
+            <Factory className="w-5 h-5 text-blue-400" />
             <span className="font-bold text-white text-xs tracking-wide">
               CHAPTER 04
             </span>
-            <span className="text-white/70">•</span>
-            <span className="font-semibold text-white text-xs">
+            <span className="text-white/50">•</span>
+            <span className="font-semibold text-blue-300 text-xs">
               MANUFACTURING
             </span>
           </div>
 
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-black leading-tight mb-6">
-            SMART <span style={{ color: "#1e40af" }}>MANUFACTURING</span>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6">
+            SMART <span className="text-blue-400">MANUFACTURING</span>
           </h2>
 
-          <p className="text-base text-gray-700 max-w-4xl mx-auto leading-relaxed text-justify">
+          <p className="text-base text-gray-300 max-w-4xl mx-auto leading-relaxed text-justify">
             Manufacturing analytics and digitalization efforts progressed with
             the onboarding of the Lush and Kellogg's entities to the
             Manufacturing Power BI suite. Development of the overall

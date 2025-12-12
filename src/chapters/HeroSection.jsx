@@ -93,13 +93,13 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-red-50 via-orange-50 to-amber-50">
+    <section className="relative min-h-screen overflow-hidden burgundy-gradient">
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-400/30 rounded-full blur-3xl animate-pulse-glow"></div>
-        <div className="absolute top-1/3 -left-32 w-96 h-96 bg-orange-400/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-red-600/20 rounded-full blur-3xl animate-pulse-glow"></div>
+        <div className="absolute top-1/3 -left-32 w-[600px] h-[600px] bg-red-700/15 rounded-full blur-3xl animate-float"></div>
         <div
-          className="absolute bottom-20 right-1/4 w-72 h-72 bg-amber-400/25 rounded-full blur-3xl"
+          className="absolute bottom-20 right-1/4 w-[400px] h-[400px] bg-rose-600/20 rounded-full blur-3xl animate-pulse-glow"
           style={{ animationDelay: "2s" }}
         ></div>
       </div>
@@ -114,16 +114,13 @@ const HeroSection = () => {
         >
           {/* Newsletter Header */}
           <motion.div variants={itemVariants} className="text-center mt-12">
-            <div
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-full mb-10 shadow-lg"
-              style={{ backgroundColor: "#e4002b" }}
-            >
-              <Calendar className="w-5 h-5 text-white" />
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full mb-10 glass-card-hover shadow-2xl border-2 border-red-500/30">
+              <Calendar className="w-5 h-5 text-red-400" />
               <span className="font-bold text-white text-sm tracking-wide">
                 QUARTERLY DIGITALIZATION NEWSLETTER
               </span>
-              <span className="text-white/70">•</span>
-              <span className="font-semibold text-white text-sm">
+              <span className="text-white/50">•</span>
+              <span className="font-semibold text-red-300 text-sm">
                 ISSUE #03 - Q3 2025
               </span>
             </div>
@@ -136,20 +133,21 @@ const HeroSection = () => {
               variants={itemVariants}
               className="lg:col-span-2 h-full flex flex-col space-y-4"
             >
-              <div className="bg-gradient-to-br from-white via-white to-red-50/30 flex-1 backdrop-blur-xl rounded-3xl p-6 lg:p-10 shadow-2xl border border-red-200/40 relative overflow-hidden">
+              <div className="glass-card-hover flex-1 rounded-3xl p-6 lg:p-10 shadow-2xl border-2 border-white/10 relative overflow-hidden">
                 {/* Decorative corner accent */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-red-500/20 to-transparent rounded-bl-full"></div>
+                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-red-500/30 to-transparent rounded-bl-full"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-red-600/20 to-transparent rounded-tr-full"></div>
 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 relative">
-                  <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
                     TOLARAM
                   </span>
                   <br />
-                  <span className="bg-gradient-to-r from-red-600 via-red-500 to-orange-500 bg-clip-text text-transparent animate-pulse-glow">
+                  <span className="bg-gradient-to-r from-red-400 via-red-500 to-red-600 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]">
                     DIGITALIZATION
                   </span>
                   <br />
-                  <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
                     NEWSLETTER
                   </span>
                 </h1>
@@ -176,7 +174,7 @@ const HeroSection = () => {
                   </div>
                 </div> */}
 
-                <p className="text-base lg:text-xl text-gray-600 leading-relaxed max-w-xl font-medium relative">
+                <p className="text-base lg:text-xl text-gray-300 leading-relaxed max-w-xl font-medium relative">
                   Discover our journey through enterprise transformation, AI
                   usage, adoption, and operational excellence across the
                   organization.
@@ -184,28 +182,22 @@ const HeroSection = () => {
               </div>
 
               {/* Publisher Info */}
-              <div
-                className="rounded-2xl p-5 shadow-2xl relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #e4002b 0%, #b8001f 100%)",
-                }}
-              >
+              <div className="rounded-2xl p-5 shadow-2xl relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300 glass-card-hover border-2 border-red-500/30 red-gradient">
                 {/* Shine effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                <div className="flex items-end justify-between">
+                <div className="flex items-end justify-between relative z-10">
                   <div className="flex items-center gap-3">
                     <Globe className="w-5 h-5 text-white" />
                     <span className="font-bold text-white text-base tracking-wide">
                       PUBLISHER
                     </span>
                   </div>
-                  <div className="text-sm text-white cursor-pointer hover:scale-110">
+                  <div className="text-sm text-white cursor-pointer hover:scale-110 transition-transform">
                     www.tolaram.com
                   </div>
                 </div>
 
-                <div className="text-white">
+                <div className="text-white relative z-10">
                   <div className="flex items-end justify-between mt-1">
                     <div className="font-bold text-base text-white">
                       Tolaram Group
@@ -219,11 +211,11 @@ const HeroSection = () => {
             {/* Right Column - Key Achievements */}
             <motion.div variants={itemVariants} className="h-full">
               {/* Quick Stats */}
-              <div className="bg-gradient-to-br from-white via-white to-amber-50/40 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-amber-200/50 h-full relative overflow-hidden">
+              <div className="glass-card-hover rounded-2xl p-6 shadow-2xl border-2 border-white/10 h-full relative overflow-hidden">
                 {/* Decorative element */}
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-amber-400/20 to-transparent rounded-full blur-2xl"></div>
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-red-500/30 to-transparent rounded-full blur-2xl"></div>
 
-                <h3 className="font-black text-transparent bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-base tracking-wide mb-4 lg:mb-5 relative">
+                <h3 className="font-black text-transparent bg-gradient-to-r from-white to-gray-300 bg-clip-text text-base tracking-wide mb-4 lg:mb-5 relative">
                   KEY ACHIEVEMENTS
                 </h3>
                 {/* Award Section */}
@@ -234,7 +226,7 @@ const HeroSection = () => {
                   transition={{ delay: 1, duration: 0.8 }}
                 >
                   <motion.div
-                    className="flex items-center justify-center gap-2 text-gray-800 text-sm font-medium bg-gradient-to-r from-red-50 to-orange-50 rounded-lg p-3 border border-red-200/50 shadow-sm"
+                    className="flex items-center justify-center gap-2 text-white text-sm font-medium glass-card rounded-lg p-3 border border-red-500/30 shadow-lg"
                     whileHover={{ scale: 1.02, y: -1 }}
                     transition={{ duration: 0.2 }}
                   >
@@ -276,13 +268,12 @@ const HeroSection = () => {
                             : { scale: 0.8, opacity: 0 }
                         }
                         transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
-                        className="text-center p-3 rounded-xl bg-gradient-to-br from-white to-red-50/30 hover:shadow-lg hover:scale-105 transition-all duration-300 border border-red-100/50 group"
+                        className="text-center p-3 rounded-xl glass-card-hover hover:scale-105 transition-all duration-300 border border-white/10 group"
                       >
                         <Icon
-                          className="w-7 h-7 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300"
-                          style={{ color: "#e4002b" }}
+                          className="w-7 h-7 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300 text-red-400"
                         />
-                        <div className="font-bold text-base text-black">
+                        <div className="font-bold text-base text-white">
                           {metric.value === "SAP" ? (
                             <span className="text-base">SAP S4Hana</span>
                           ) : (
@@ -298,7 +289,7 @@ const HeroSection = () => {
                             </>
                           )}
                         </div>
-                        <p className="text-xs text-gray-600 leading-tight">
+                        <p className="text-xs text-gray-300 leading-tight">
                           {metric.label}
                         </p>
                       </motion.div>
@@ -315,7 +306,6 @@ const HeroSection = () => {
               whileHover={{
                 scale: 1.08,
                 y: -4,
-                boxShadow: "0 25px 50px -12px rgb(228 0 43 / 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -330,18 +320,15 @@ const HeroSection = () => {
                   });
                 }
               }}
-              className="mt-12 group relative overflow-hidden inline-flex items-center gap-3 px-10 py-4 text-white font-black text-lg rounded-2xl transition-all duration-300 shadow-2xl hover:shadow-red-500/50 focus:ring-4 focus:ring-red-500 focus:ring-offset-2"
-              style={{
-                background: "linear-gradient(135deg, #e4002b 0%, #ff0038 100%)",
-              }}
+              className="mt-12 group relative overflow-hidden inline-flex items-center gap-3 px-10 py-4 text-white font-black text-lg rounded-2xl transition-all duration-300 shadow-2xl shadow-red-500/50 hover:shadow-red-500/80 focus:ring-4 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-[#1a0a0e] red-gradient border-2 border-red-500/30"
               aria-label="Read the full newsletter"
             >
               {/* Animated border glow */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-red-400 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-red-400 to-rose-500 opacity-0 group-hover:opacity-50 transition-opacity duration-300 blur-xl"></div>
 
               {/* Shimmer effect on hover */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                 initial={{ x: "-100%" }}
                 whileHover={{ x: "100%" }}
                 transition={{ duration: 0.8 }}

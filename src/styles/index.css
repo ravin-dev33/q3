@@ -7,45 +7,51 @@
 
 @layer base {
 	:root {
-		--background: 0 0% 98%;
-		--foreground: 222 84% 4.9%;
-		--card: 0 0% 96%;
-		--card-foreground: 222 84% 4.9%;
-		--popover: 0 0% 98%;
-		--popover-foreground: 222 84% 4.9%;
-		--primary: 222 84% 4.9%;
-		--primary-foreground: 0 0% 98%;
-		--secondary: 210 40% 96%;
-		--secondary-foreground: 222 84% 4.9%;
-		--muted: 210 40% 94%;
-		--muted-foreground: 215.4 16.3% 46.9%;
-		--accent: 355 100% 44%;
-		--accent-foreground: 222 84% 4.9%;
+		--background: 0 0% 7%;
+		--foreground: 0 0% 98%;
+		--card: 0 0% 12%;
+		--card-foreground: 0 0% 98%;
+		--popover: 0 0% 10%;
+		--popover-foreground: 0 0% 98%;
+		--primary: 0 0% 98%;
+		--primary-foreground: 0 0% 7%;
+		--secondary: 0 0% 16%;
+		--secondary-foreground: 0 0% 98%;
+		--muted: 0 0% 20%;
+		--muted-foreground: 0 0% 70%;
+		--accent: 355 85% 45%;
+		--accent-foreground: 0 0% 98%;
 		--destructive: 0 84.2% 60.2%;
 		--destructive-foreground: 0 0% 98%;
-		--border: 214.3 31.8% 91.4%;
-		--input: 214.3 31.8% 91.4%;
-		--ring: 355 100% 44%;
+		--border: 0 0% 20%;
+		--input: 0 0% 20%;
+		--ring: 355 85% 45%;
 		--radius: 0.75rem;
-		--chart-1: 355 100% 44%;
+		--chart-1: 355 85% 45%;
 		--chart-2: 30 80% 55%;
 		--chart-3: 20 80% 55%;
 		--chart-4: 200 80% 60%;
 		--chart-5: 190 80% 60%;
-		--hero-bg: 220 26% 14%;
+		--hero-bg: 0 0% 7%;
 		--hero-foreground: 0 0% 98%;
-		--midnight-blue: 220 26% 14%;
-		--midnight-blue-foreground: 0 0% 98%;
 
-		/* Standardized chapter colors for consistency */
-		--sap-color: #f59e0b;
-		--it-color: #3b82f6;
-		--marketing-color: #8b5cf6;
-		--manufacturing-color: #e4002b;
-		--finance-color: #10b981;
-		--logistics-color: #f97316;
-		--sales-color: #6366f1;
-		--gitex-color: #1e40af;
+		/* Dark Burgundy/Red Theme Colors */
+		--burgundy-dark: #1a0a0e;
+		--burgundy-medium: #2d1215;
+		--burgundy-light: #4a1e25;
+		--red-primary: #dc2626;
+		--red-accent: #ef4444;
+		--red-bright: #f87171;
+
+		/* Standardized chapter colors for dark theme */
+		--sap-color: #fbbf24;
+		--it-color: #60a5fa;
+		--marketing-color: #a78bfa;
+		--manufacturing-color: #f87171;
+		--finance-color: #34d399;
+		--logistics-color: #fb923c;
+		--sales-color: #818cf8;
+		--gitex-color: #3b82f6;
 
 		/* Spacing scale based on 8px grid */
 		--spacing-xs: 0.5rem;   /* 8px */
@@ -173,6 +179,28 @@
   .hero-card {
     @apply bg-white/20 border border-sky-300/30 backdrop-blur-sm;
     @apply hover:bg-white/30 transition-all duration-300;
+  }
+
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+    @apply hover:bg-white/10 transition-all duration-300;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .glass-card-hover {
+    @apply glass-card hover:border-white/20 hover:shadow-2xl hover:shadow-red-500/20;
+  }
+
+  .burgundy-gradient {
+    background: linear-gradient(135deg, #1a0a0e 0%, #2d1215 50%, #4a1e25 100%);
+  }
+
+  .red-gradient {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%);
+  }
+
+  .dark-burgundy-gradient {
+    background: linear-gradient(180deg, #0a0506 0%, #1a0a0e 50%, #2d1215 100%);
   }
 
   .futuristic-grid {

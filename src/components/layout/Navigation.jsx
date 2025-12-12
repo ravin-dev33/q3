@@ -116,7 +116,7 @@ const Navigation = ({
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-background/80 backdrop-blur-md border-b border-border/50"
+            ? "glass-card border-b border-white/10"
             : "bg-transparent"
         }`}
         role="navigation"
@@ -150,8 +150,8 @@ const Navigation = ({
                   onClick={() => scrollToSection(item.header)}
                   className={`transition-colors duration-200 newsletter-body text-sm ${
                     activeChapter === item.sectionId
-                      ? "text-[#e4002b] font-semibold"
-                      : "text-foreground hover:text-accent"
+                      ? "text-red-400 font-semibold"
+                      : "text-gray-200 hover:text-red-400"
                   }`}
                 >
                   {item.name}
@@ -197,7 +197,7 @@ const Navigation = ({
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="fixed top-0 right-0 w-80 h-screen bg-card/95 backdrop-blur-md border-l border-border/50 z-50"
+              className="fixed top-0 right-0 w-80 h-screen glass-card border-l border-white/10 z-50"
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation menu"
@@ -206,16 +206,16 @@ const Navigation = ({
                 {/* Close Button */}
                 <div className="flex justify-between items-center mb-8">
                   <div>
-                    <div className="newsletter-heading text-lg text-foreground">
+                    <div className="newsletter-heading text-lg text-white">
                       Navigation
                     </div>
-                    <div className="newsletter-mono text-muted-foreground text-xs">
+                    <div className="newsletter-mono text-gray-400 text-xs">
                       TABLE OF CONTENTS
                     </div>
                   </div>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 text-muted-foreground hover:text-foreground transition-colors duration-200"
+                    className="p-2 text-gray-400 hover:text-white transition-colors duration-200"
                   >
                     <X className="w-6 h-6" />
                   </button>
@@ -232,11 +232,11 @@ const Navigation = ({
                         initial={{ x: 20, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: index * 0.1, duration: 0.3 }}
-                        className="border border-gray-200 rounded-lg overflow-hidden"
+                        className="border border-white/10 rounded-lg overflow-hidden glass-card"
                       >
                         {/* Chapter Header */}
                         <div
-                          className={`${isActiveChapter ? "bg-red-100" : "bg-white"} transition-all duration-300`}
+                          className={`${isActiveChapter ? "bg-white/10" : "bg-white/5"} transition-all duration-300`}
                         >
                           <button
                             onClick={() => {
@@ -244,10 +244,10 @@ const Navigation = ({
                               toggleChapter(item.sectionId);
                               setTimeout(() => setIsMobileMenuOpen(false), 300);
                             }}
-                            className={`w-full flex items-center justify-between py-4 px-4 text-left transition-colors duration-200 hover:bg-gray-50 ${
+                            className={`w-full flex items-center justify-between py-4 px-4 text-left transition-colors duration-200 hover:bg-white/5 ${
                               isActiveChapter
-                                ? "font-semibold"
-                                : "text-foreground hover:text-accent"
+                                ? "font-semibold text-white"
+                                : "text-gray-300 hover:text-red-400"
                             }`}
                           >
                             <div className="flex items-center gap-3">
@@ -260,13 +260,13 @@ const Navigation = ({
                               </span>
                             </div>
                             <div className="flex items-center gap-2">
-                              <span className="newsletter-mono text-muted-foreground text-xs">
+                              <span className="newsletter-mono text-gray-400 text-xs">
                                 0{index + 1}
                               </span>
                               {isActiveChapter ? (
-                                <ChevronUp className="w-4 h-4 text-gray-500" />
+                                <ChevronUp className="w-4 h-4 text-gray-400" />
                               ) : (
-                                <ChevronDown className="w-4 h-4 text-gray-500" />
+                                <ChevronDown className="w-4 h-4 text-gray-400" />
                               )}
                             </div>
                           </button>
@@ -274,12 +274,13 @@ const Navigation = ({
                           {/* Progress Bar */}
                           {isActiveChapter && (
                             <div className="px-4 pb-3">
-                              <div className="w-full bg-gray-200 rounded-full h-1">
+                              <div className="w-full bg-white/10 rounded-full h-1">
                                 <motion.div
-                                  className="h-1 rounded-full transition-all duration-300"
+                                  className="h-1 rounded-full transition-all duration-300 shadow-lg"
                                   style={{
                                     backgroundColor: item.color,
                                     width: `${scrollProgress}%`,
+                                    boxShadow: `0 0 10px ${item.color}`,
                                   }}
                                   initial={{ width: 0 }}
                                   animate={{ width: `${scrollProgress}%` }}
@@ -297,7 +298,7 @@ const Navigation = ({
                               animate={{ height: "auto", opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
                               transition={{ duration: 0.3 }}
-                              className="overflow-hidden bg-gray-50"
+                              className="overflow-hidden bg-white/5"
                             >
                               <div className="py-2">
                                 {item.sections.map((section, sectionIndex) => {
@@ -321,10 +322,10 @@ const Navigation = ({
                                           300
                                         );
                                       }}
-                                      className={`w-full flex items-center gap-3 py-3 px-6 text-left transition-all duration-200 hover:bg-white ${
+                                      className={`w-full flex items-center gap-3 py-3 px-6 text-left transition-all duration-200 hover:bg-white/10 ${
                                         isActiveSection
-                                          ? "bg-white shadow-sm font-medium"
-                                          : "text-gray-700 hover:text-gray-900"
+                                          ? "bg-white/15 shadow-sm font-medium"
+                                          : "text-gray-300 hover:text-white"
                                       }`}
                                     >
                                       <Icon
@@ -339,13 +340,13 @@ const Navigation = ({
                                         <div
                                           className={`text-sm ${
                                             isActiveSection
-                                              ? "font-medium text-gray-900"
-                                              : "text-gray-700"
+                                              ? "font-medium text-white"
+                                              : "text-gray-300"
                                           }`}
                                         >
                                           {section.title}
                                         </div>
-                                        <div className="text-xs text-gray-500 mt-1">
+                                        <div className="text-xs text-gray-400 mt-1">
                                           {section.subtitle}
                                         </div>
                                       </div>
@@ -366,12 +367,12 @@ const Navigation = ({
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.8, duration: 0.3 }}
-                  className="mt-12 pt-6 border-t border-border/30"
+                  className="mt-12 pt-6 border-t border-white/10"
                 >
-                  <div className="newsletter-mono text-muted-foreground text-xs mb-2">
-                    ISSUE #02 • Q2 2025
+                  <div className="newsletter-mono text-gray-400 text-xs mb-2">
+                    ISSUE #03 • Q3 2025
                   </div>
-                  <div className="newsletter-body text-sm text-muted-foreground">
+                  <div className="newsletter-body text-sm text-gray-300">
                     Tolaram Digitalization Excellence Newsletter
                   </div>
                 </motion.div>
@@ -389,7 +390,7 @@ const Navigation = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-background/50 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
             onClick={() => setIsMobileMenuOpen(false)}
           />
         )}
