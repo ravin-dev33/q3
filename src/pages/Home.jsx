@@ -15,6 +15,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Particles from "../components/Particles";
+import HighlightsSection from "../chapters/HighlightsSection";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -236,6 +237,9 @@ const Home = () => {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* Highlights Section */}
+      <HighlightsSection />
 
       {/* Chapters Grid Section */}
       <section id="chapters" className="relative py-16 px-6">
