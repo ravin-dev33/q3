@@ -86,6 +86,24 @@ const Navigation = () => {
             </motion.button>
 
             <div className="flex items-center gap-4">
+              <div className="hidden lg:flex items-center gap-2">
+                {navigationLinks.map((link) => (
+                  <motion.button
+                    key={link.path}
+                    onClick={() => handleNavigation(link.path)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 ${
+                      location.pathname === link.path
+                        ? "bg-red-500 text-white"
+                        : "glass-card text-gray-800 dark:text-white hover:border-red-500/50 border border-gray-300 dark:border-white/20"
+                    }`}
+                  >
+                    {link.name}
+                  </motion.button>
+                ))}
+              </div>
+
               <motion.button
                 onClick={toggleTheme}
                 whileHover={{ scale: 1.1 }}
@@ -107,7 +125,7 @@ const Navigation = () => {
                   animate={{ opacity: 1, x: 0 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="hidden sm:inline-flex glass-card-premium px-6 py-2 rounded-full font-semibold text-gray-800 dark:text-white hover:border-red-500/50 transition-all duration-300 items-center gap-2 border border-gray-300 dark:border-white/20"
+                  className="hidden sm:inline-flex lg:hidden glass-card-premium px-6 py-2 rounded-full font-semibold text-gray-800 dark:text-white hover:border-red-500/50 transition-all duration-300 items-center gap-2 border border-gray-300 dark:border-white/20"
                 >
                   <Home className="w-4 h-4" />
                   <span>Home</span>
