@@ -1,37 +1,37 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useState, useRef, useEffect } from 'react';
-import { Trophy, Zap, TrendingUp, Sparkles, Shield, Users } from 'lucide-react';
+import { Trophy } from 'lucide-react';
 
 const achievements = [
   {
-    Icon: Zap,
+    icon: '/2.png',
     stat: '4,000+',
     label: 'Network endpoints Protected',
   },
   {
-    Icon: TrendingUp,
+    icon: '/1.png',
     stat: '6 SAP',
     label: 'Strategic implementations',
     subtitle: 'Go Lives',
   },
   {
-    Icon: Sparkles,
+    icon: '/4.png',
     stat: '2 AI Marketing',
     label: 'campaigns launched',
   },
   {
-    Icon: Shield,
+    icon: '/5.png',
     stat: '11 RPA Bots',
     label: 'Live across business',
   },
   {
-    Icon: Users,
+    icon: '/3.png',
     stat: '1,500+',
     label: 'Users trained',
   },
   {
-    Icon: Shield,
+    icon: '/2.png',
     stat: '22,000+',
     label: 'Assets protected',
   },
@@ -78,15 +78,15 @@ export default function KeyAchievementsSection() {
   }, []);
 
   const calculateIconTransform = (index) => {
-    if (!isMouseInSection) return { x: 0, y: 0, rotate: 0 };
+    if (!isMouseInSection) return { x: 0, y: 0, rotateX: 0, rotateY: 0, scale: 1 };
 
     const cardRefs = document.querySelectorAll('.achievement-card');
-    if (!cardRefs[index]) return { x: 0, y: 0, rotate: 0 };
+    if (!cardRefs[index]) return { x: 0, y: 0, rotateX: 0, rotateY: 0, scale: 1 };
 
     const cardRect = cardRefs[index].getBoundingClientRect();
     const sectionRect = sectionRef.current?.getBoundingClientRect();
 
-    if (!sectionRect) return { x: 0, y: 0, rotate: 0 };
+    if (!sectionRect) return { x: 0, y: 0, rotateX: 0, rotateY: 0, scale: 1 };
 
     const cardCenterX = cardRect.left - sectionRect.left + cardRect.width / 2;
     const cardCenterY = cardRect.top - sectionRect.top + cardRect.height / 2;
@@ -96,14 +96,18 @@ export default function KeyAchievementsSection() {
 
     const angle = Math.atan2(deltaY, deltaX);
     const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    const maxDistance = 300;
+    const maxDistance = 400;
     const movementFactor = Math.min(distance / maxDistance, 1);
 
-    const moveX = Math.cos(angle) * movementFactor * 15;
-    const moveY = Math.sin(angle) * movementFactor * 15;
-    const rotation = (angle * 180) / Math.PI;
+    const moveX = Math.cos(angle) * movementFactor * 20;
+    const moveY = Math.sin(angle) * movementFactor * 20;
 
-    return { x: moveX, y: moveY, rotate: rotation };
+    const rotateY = (deltaX / cardRect.width) * 25;
+    const rotateX = -(deltaY / cardRect.height) * 25;
+
+    const scale = 1 + movementFactor * 0.1;
+
+    return { x: moveX, y: moveY, rotateX, rotateY, scale };
   };
 
   const containerVariants = {
@@ -132,6 +136,7 @@ export default function KeyAchievementsSection() {
     <section
       ref={sectionRef}
       className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50"
+      style={{ perspective: '2000px' }}
     >
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
@@ -169,7 +174,6 @@ export default function KeyAchievementsSection() {
           className="grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           {achievements.map((achievement, index) => {
-            const { Icon } = achievement;
             const transform = calculateIconTransform(index);
 
             return (
@@ -177,55 +181,92 @@ export default function KeyAchievementsSection() {
                 key={index}
                 variants={itemVariants}
                 className="achievement-card relative group"
+                style={{ transformStyle: 'preserve-3d' }}
               >
-                <div className="bg-white rounded-2xl p-8 h-full flex flex-col items-center justify-center text-center relative overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300">
+                <motion.div
+                  animate={
+                    isMouseInSection
+                      ? {
+                          rotateX: transform.rotateX * 0.3,
+                          rotateY: transform.rotateY * 0.3,
+                          z: transform.scale * 20,
+                        }
+                      : { rotateX: 0, rotateY: 0, z: 0 }
+                  }
+                  transition={{
+                    type: 'spring',
+                    stiffness: 100,
+                    damping: 20,
+                    mass: 0.8,
+                  }}
+                  className="bg-white rounded-2xl p-8 h-full flex flex-col items-center justify-center text-center relative overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                  }}
+                >
                   <motion.div
                     animate={
                       isMouseInSection
                         ? {
                             x: transform.x,
                             y: transform.y,
+                            scale: transform.scale,
+                            rotateY: transform.rotateY,
+                            rotateX: transform.rotateX,
+                            z: 50,
                           }
-                        : { x: 0, y: 0 }
+                        : { x: 0, y: 0, scale: 1, rotateY: 0, rotateX: 0, z: 0 }
                     }
                     transition={{
                       type: 'spring',
-                      stiffness: 150,
+                      stiffness: 120,
                       damping: 15,
                       mass: 0.5,
                     }}
                     className="mb-6 relative z-10"
                     style={{
                       transformStyle: 'preserve-3d',
-                      perspective: '1000px',
+                      filter: isMouseInSection
+                        ? `drop-shadow(0 ${transform.y * 0.5}px ${transform.scale * 20}px rgba(239, 68, 68, 0.3))`
+                        : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))',
                     }}
                   >
-                    <motion.div
-                      animate={
-                        isMouseInSection
-                          ? {
-                              rotateY: transform.x * 0.5,
-                              rotateX: -transform.y * 0.5,
-                            }
-                          : { rotateY: 0, rotateX: 0 }
-                      }
-                      transition={{
-                        type: 'spring',
-                        stiffness: 150,
-                        damping: 15,
-                      }}
-                      className="relative"
-                      style={{
-                        transformStyle: 'preserve-3d',
-                      }}
-                    >
-                      <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
-                        <Icon className="w-8 h-8 text-red-600" strokeWidth={2.5} />
-                      </div>
-                    </motion.div>
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 relative">
+                      <motion.div
+                        animate={
+                          isMouseInSection
+                            ? {
+                                rotateZ: transform.rotateY * 0.2,
+                              }
+                            : { rotateZ: 0 }
+                        }
+                        transition={{
+                          type: 'spring',
+                          stiffness: 100,
+                          damping: 12,
+                        }}
+                        className="absolute inset-0 rounded-full bg-gradient-to-br from-red-100 to-pink-100 opacity-30 blur-xl"
+                        style={{ transform: 'translateZ(-20px)' }}
+                      />
+                      <img
+                        src={achievement.icon}
+                        alt={achievement.label}
+                        className="w-full h-full object-contain relative z-10"
+                        style={{
+                          transform: 'translateZ(30px)',
+                          transformStyle: 'preserve-3d',
+                        }}
+                      />
+                    </div>
                   </motion.div>
 
-                  <div className="space-y-2">
+                  <div
+                    className="space-y-2"
+                    style={{
+                      transform: 'translateZ(20px)',
+                      transformStyle: 'preserve-3d',
+                    }}
+                  >
                     <h3 className="text-2xl sm:text-3xl font-black text-gray-900">
                       {achievement.stat}
                       {achievement.subtitle && (
@@ -239,16 +280,33 @@ export default function KeyAchievementsSection() {
                     </p>
                   </div>
 
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-500/0 via-transparent to-transparent group-hover:from-red-500/5 transition-all duration-500 rounded-2xl" />
-                </div>
+                  <motion.div
+                    animate={
+                      isMouseInSection
+                        ? {
+                            opacity: 0.1,
+                            scale: 1.2,
+                          }
+                        : { opacity: 0, scale: 1 }
+                    }
+                    className="absolute inset-0 bg-gradient-to-br from-red-500 via-pink-500 to-transparent rounded-2xl"
+                    style={{ transform: 'translateZ(-10px)' }}
+                  />
+
+                  <div
+                    className="absolute inset-0 bg-gradient-to-br from-red-500/0 via-transparent to-transparent group-hover:from-red-500/5 transition-all duration-500 rounded-2xl"
+                    style={{ transform: 'translateZ(5px)' }}
+                  />
+                </motion.div>
               </motion.div>
             );
           })}
         </motion.div>
       </div>
 
-      <div className="absolute top-10 left-10 w-72 h-72 bg-red-200/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-10 w-72 h-72 bg-orange-200/20 rounded-full blur-3xl" />
+      <div className="absolute top-10 left-10 w-96 h-96 bg-red-300/20 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-300/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-200/10 rounded-full blur-3xl" />
     </section>
   );
 }
