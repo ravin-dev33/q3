@@ -210,7 +210,7 @@ export default function KeyAchievementsSection() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12"
         >
           {achievements.map((achievement, index) => (
             <AchievementCard
