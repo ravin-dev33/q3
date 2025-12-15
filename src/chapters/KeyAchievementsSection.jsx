@@ -5,7 +5,7 @@ import { Trophy } from 'lucide-react';
 
 const achievements = [
   {
-    icon: '/2.png',
+    icon: '/6.png',
     stat: '4,000+',
     label: 'Network endpoints Protected',
   },
