@@ -156,11 +156,25 @@ const Home = () => {
 
       {/* Hero Section */}
       <section className="relative py-32 px-6 overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-30"
+          >
+            <source src="/hero_bg.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/80 via-gray-900/60 to-gray-900" />
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="max-w-6xl mx-auto text-center"
+          className="max-w-6xl mx-auto text-center relative z-10"
         >
           {/* Logo/Brand */}
           <motion.div
