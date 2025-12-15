@@ -106,15 +106,15 @@ function AchievementCard({ achievement, index, mousePosition, isMouseInSection, 
       </motion.div>
 
       <div className="space-y-2">
-        <h3 className="text-2xl sm:text-3xl font-black text-gray-900">
+        <h3 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">
           {achievement.stat}
           {achievement.subtitle && (
-            <span className="block text-xl font-bold text-gray-700 mt-1">
+            <span className="block text-xl font-bold text-gray-700 dark:text-gray-300 mt-1">
               {achievement.subtitle}
             </span>
           )}
         </h3>
-        <p className="text-base text-gray-600 font-medium">
+        <p className="text-base text-gray-600 dark:text-gray-400 font-medium">
           {achievement.label}
         </p>
       </div>
@@ -175,7 +175,7 @@ export default function KeyAchievementsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50"
+      className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
     >
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
@@ -185,7 +185,7 @@ export default function KeyAchievementsSection() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-8">
+          <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-8">
             KEY ACHIEVEMENTS
           </h2>
 
@@ -194,11 +194,11 @@ export default function KeyAchievementsSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-gradient-to-r from-red-50 to-pink-50 rounded-2xl p-6 border border-red-100 shadow-sm"
+            className="bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 rounded-2xl p-6 border border-red-100 dark:border-red-800 shadow-sm"
           >
             <div className="flex items-center justify-center gap-3">
-              <Trophy className="w-6 h-6 text-red-600" />
-              <p className="text-lg font-semibold text-gray-800">
+              <Trophy className="w-6 h-6 text-red-600 dark:text-red-400" />
+              <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
                 Nigeria's First Brand driven AI podcast
               </p>
             </div>

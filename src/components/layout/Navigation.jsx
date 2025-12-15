@@ -1,10 +1,25 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Home } from "lucide-react";
+import { Home, Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "../../contexts/ThemeContext";
+
+const navigationLinks = [
+  { name: "SAP", path: "/sap" },
+  { name: "GITEX", path: "/gitex" },
+  { name: "IT Infrastructure", path: "/it-infrastructure" },
+  { name: "Marketing", path: "/marketing" },
+  { name: "Manufacturing", path: "/manufacturing" },
+  { name: "Finance", path: "/finance" },
+  { name: "Logistics", path: "/logistics" },
+  { name: "Sales", path: "/sales" },
+  { name: "Achievements", path: "/achievements" },
+];
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const isHome = location.pathname === "/";
@@ -19,56 +34,160 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass-card border-b border-white/10" : "bg-transparent"
-      }`}
-      role="navigation"
-      aria-label="Main navigation"
-    >
-      <div className="container mx-auto px-4 sm:px-6">
-        <div
-          className={`flex items-center justify-between transition-all duration-300 ${
-            isScrolled ? "h-16" : "h-20"
-          }`}
-        >
-          {/* Logo */}
-          <motion.button
-            onClick={() => navigate("/")}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center space-x-3 focus:outline-none"
-          >
-            <img
-              src="/logo.png"
-              alt="Tolaram Logo"
-              className={`object-contain transition-all duration-300 ${
-                isScrolled ? "h-10" : "h-14"
-              }`}
-            />
-          </motion.button>
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
-          {/* Home Button (shown on detail pages) */}
-          {!isHome && (
+  const handleNavigation = (path) => {
+    navigate(path);
+    setIsMobileMenuOpen(false);
+  };
+
+  return (
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? "glass-card border-b border-gray-200 dark:border-white/10"
+            : "bg-transparent"
+        }`}
+        role="navigation"
+        aria-label="Main navigation"
+      >
+        <div className="container mx-auto px-4 sm:px-6">
+          <div
+            className={`flex items-center justify-between transition-all duration-300 ${
+              isScrolled ? "h-16" : "h-20"
+            }`}
+          >
             <motion.button
-              onClick={() => navigate("/")}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
+              onClick={() => handleNavigation("/")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="glass-card-premium px-6 py-2 rounded-full font-semibold text-white hover:border-red-500/50 transition-all duration-300 inline-flex items-center gap-2 border border-white/20"
+              className="flex items-center space-x-3 focus:outline-none z-50"
             >
-              <Home className="w-4 h-4" />
-              <span className="hidden sm:inline">Home</span>
+              <img
+                src="/logo.png"
+                alt="Tolaram Logo"
+                className={`object-contain transition-all duration-300 ${
+                  isScrolled ? "h-10" : "h-14"
+                }`}
+              />
             </motion.button>
-          )}
+
+            <div className="flex items-center gap-4">
+              <motion.button
+                onClick={toggleTheme}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-2 rounded-full bg-white/10 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 text-gray-800 dark:text-white hover:bg-white/20 dark:hover:bg-white/20 transition-all"
+                aria-label="Toggle theme"
+              >
+                {theme === 'light' ? (
+                  <Moon className="w-5 h-5" />
+                ) : (
+                  <Sun className="w-5 h-5" />
+                )}
+              </motion.button>
+
+              {!isHome && (
+                <motion.button
+                  onClick={() => handleNavigation("/")}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="hidden sm:inline-flex glass-card-premium px-6 py-2 rounded-full font-semibold text-gray-800 dark:text-white hover:border-red-500/50 transition-all duration-300 items-center gap-2 border border-gray-300 dark:border-white/20"
+                >
+                  <Home className="w-4 h-4" />
+                  <span>Home</span>
+                </motion.button>
+              )}
+
+              <motion.button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="lg:hidden p-2 rounded-full bg-white/10 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 text-gray-800 dark:text-white z-50"
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </motion.button>
+            </div>
+          </div>
         </div>
-      </div>
-    </motion.nav>
+      </motion.nav>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-80 bg-white dark:bg-gray-900 shadow-2xl z-40 overflow-y-auto"
+            >
+              <div className="p-6 pt-24">
+                <div className="space-y-2">
+                  {!isHome && (
+                    <motion.button
+                      onClick={() => handleNavigation("/")}
+                      whileHover={{ x: 4 }}
+                      className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left font-semibold text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                    >
+                      <Home className="w-5 h-5" />
+                      Home
+                    </motion.button>
+                  )}
+
+                  {navigationLinks.map((link, index) => (
+                    <motion.button
+                      key={link.path}
+                      onClick={() => handleNavigation(link.path)}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      whileHover={{ x: 4 }}
+                      className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all ${
+                        location.pathname === link.path
+                          ? "bg-red-500 text-white"
+                          : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      }`}
+                    >
+                      {link.name}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

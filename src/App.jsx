@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles/index.css";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
@@ -16,26 +17,28 @@ import AchievementsPage from "./pages/AchievementsPage";
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen dark-burgundy-gradient">
-        <Navigation />
+    <ThemeProvider>
+      <Router>
+        <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+          <Navigation />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/sap" element={<SAPPage />} />
-          <Route path="/gitex" element={<GITEXPage />} />
-          <Route path="/it-infrastructure" element={<ITPage />} />
-          <Route path="/marketing" element={<MarketingPage />} />
-          <Route path="/manufacturing" element={<ManufacturingPage />} />
-          <Route path="/finance" element={<FinancePage />} />
-          <Route path="/logistics" element={<LogisticsPage />} />
-          <Route path="/sales" element={<SalesPage />} />
-          <Route path="/achievements" element={<AchievementsPage />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/sap" element={<SAPPage />} />
+            <Route path="/gitex" element={<GITEXPage />} />
+            <Route path="/it-infrastructure" element={<ITPage />} />
+            <Route path="/marketing" element={<MarketingPage />} />
+            <Route path="/manufacturing" element={<ManufacturingPage />} />
+            <Route path="/finance" element={<FinancePage />} />
+            <Route path="/logistics" element={<LogisticsPage />} />
+            <Route path="/sales" element={<SalesPage />} />
+            <Route path="/achievements" element={<AchievementsPage />} />
+          </Routes>
 
-        <Footer />
-      </div>
-    </Router>
+          <Footer />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
