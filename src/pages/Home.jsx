@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import Particles from "../components/Particles";
 import HighlightsSection from "../chapters/HighlightsSection";
+import KeyAchievementsSection from "../chapters/KeyAchievementsSection";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -251,6 +252,9 @@ const Home = () => {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* Key Achievements Section */}
+      <KeyAchievementsSection />
 
       {/* Highlights Section */}
       <HighlightsSection />
