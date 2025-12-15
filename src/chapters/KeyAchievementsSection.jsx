@@ -11,9 +11,9 @@ const achievements = [
   },
   {
     icon: '/1.png',
-    stat: '6 SAP',
+    stat: '6 SAP Go Lives',
     label: 'Strategic implementations',
-    subtitle: 'Go Lives',
+    subtitle: '',
   },
   {
     icon: '/4.png',
