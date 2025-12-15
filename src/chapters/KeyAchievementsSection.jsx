@@ -37,6 +37,91 @@ const achievements = [
   },
 ];
 
+function AchievementCard({ achievement, index, mousePosition, isMouseInSection, sectionRef }) {
+  const iconRef = useRef(null);
+  const [transform, setTransform] = useState('perspective(100px) rotateY(0deg) rotateX(0deg)');
+
+  useEffect(() => {
+    if (!isMouseInSection || !iconRef.current) {
+      setTransform('perspective(100px) rotateY(0deg) rotateX(0deg)');
+      return;
+    }
+
+    const iconRect = iconRef.current.getBoundingClientRect();
+    const sectionRect = sectionRef.current?.getBoundingClientRect();
+
+    if (!sectionRect) {
+      setTransform('perspective(100px) rotateY(0deg) rotateX(0deg)');
+      return;
+    }
+
+    const iconCenterX = iconRect.left - sectionRect.left + iconRect.width / 2;
+    const iconCenterY = iconRect.top - sectionRect.top + iconRect.height / 2;
+
+    const deltaX = mousePosition.x - iconCenterX;
+    const deltaY = mousePosition.y - iconCenterY;
+
+    const rotateY = (deltaX / iconRect.width) * 5;
+    const rotateX = -(deltaY / iconRect.height) * 5;
+
+    setTransform(`perspective(100px) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`);
+  }, [mousePosition, isMouseInSection, sectionRef]);
+
+  return (
+    <motion.div
+      variants={{
+        hidden: { y: 30, opacity: 0 },
+        visible: {
+          y: 0,
+          opacity: 1,
+          transition: {
+            duration: 0.5,
+            ease: 'easeOut',
+          },
+        },
+      }}
+      className="achievement-card flex flex-col items-center text-center"
+    >
+      <motion.div
+        ref={iconRef}
+        className="mb-6 w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center"
+        style={{
+          transformStyle: 'preserve-3d',
+          transform: transform,
+        }}
+        transition={{
+          type: 'spring',
+          stiffness: 150,
+          damping: 15,
+        }}
+      >
+        <img
+          src={achievement.icon}
+          alt={achievement.label}
+          className="w-full h-full object-contain"
+          style={{
+            filter: 'drop-shadow(0 10px 20px rgba(239, 68, 68, 0.15))',
+          }}
+        />
+      </motion.div>
+
+      <div className="space-y-2">
+        <h3 className="text-2xl sm:text-3xl font-black text-gray-900">
+          {achievement.stat}
+          {achievement.subtitle && (
+            <span className="block text-xl font-bold text-gray-700 mt-1">
+              {achievement.subtitle}
+            </span>
+          )}
+        </h3>
+        <p className="text-base text-gray-600 font-medium">
+          {achievement.label}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function KeyAchievementsSection() {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -77,29 +162,6 @@ export default function KeyAchievementsSection() {
     };
   }, []);
 
-  const calculateIconTransform = (index) => {
-    if (!isMouseInSection) return { rotateX: 0, rotateY: 0 };
-
-    const iconElement = document.querySelector(`.achievement-icon-${index}`);
-    if (!iconElement) return { rotateX: 0, rotateY: 0 };
-
-    const iconRect = iconElement.getBoundingClientRect();
-    const sectionRect = sectionRef.current?.getBoundingClientRect();
-
-    if (!sectionRect) return { rotateX: 0, rotateY: 0 };
-
-    const iconCenterX = iconRect.left - sectionRect.left + iconRect.width / 2;
-    const iconCenterY = iconRect.top - sectionRect.top + iconRect.height / 2;
-
-    const deltaX = mousePosition.x - iconCenterX;
-    const deltaY = mousePosition.y - iconCenterY;
-
-    const rotateY = (deltaX / iconRect.width) * 15;
-    const rotateX = -(deltaY / iconRect.height) * 15;
-
-    return { rotateX, rotateY };
-  };
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -110,23 +172,10 @@ export default function KeyAchievementsSection() {
     },
   };
 
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-  };
-
   return (
     <section
       ref={sectionRef}
       className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50"
-      style={{ perspective: '1000px' }}
     >
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
@@ -163,61 +212,16 @@ export default function KeyAchievementsSection() {
           animate={inView ? 'visible' : 'hidden'}
           className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12"
         >
-          {achievements.map((achievement, index) => {
-            const transform = calculateIconTransform(index);
-
-            return (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="achievement-card flex flex-col items-center text-center"
-              >
-                <motion.div
-                  className={`achievement-icon-${index} mb-6 w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center`}
-                  style={{
-                    transformStyle: 'preserve-3d',
-                  }}
-                  animate={
-                    isMouseInSection
-                      ? {
-                          rotateX: transform.rotateX,
-                          rotateY: transform.rotateY,
-                        }
-                      : { rotateX: 0, rotateY: 0 }
-                  }
-                  transition={{
-                    type: 'spring',
-                    stiffness: 200,
-                    damping: 20,
-                    mass: 0.5,
-                  }}
-                >
-                  <img
-                    src={achievement.icon}
-                    alt={achievement.label}
-                    className="w-full h-full object-contain"
-                    style={{
-                      filter: 'drop-shadow(0 10px 20px rgba(239, 68, 68, 0.15))',
-                    }}
-                  />
-                </motion.div>
-
-                <div className="space-y-2">
-                  <h3 className="text-2xl sm:text-3xl font-black text-gray-900">
-                    {achievement.stat}
-                    {achievement.subtitle && (
-                      <span className="block text-xl font-bold text-gray-700 mt-1">
-                        {achievement.subtitle}
-                      </span>
-                    )}
-                  </h3>
-                  <p className="text-base text-gray-600 font-medium">
-                    {achievement.label}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
+          {achievements.map((achievement, index) => (
+            <AchievementCard
+              key={index}
+              achievement={achievement}
+              index={index}
+              mousePosition={mousePosition}
+              isMouseInSection={isMouseInSection}
+              sectionRef={sectionRef}
+            />
+          ))}
         </motion.div>
       </div>
 
