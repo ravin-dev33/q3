@@ -78,36 +78,26 @@ export default function KeyAchievementsSection() {
   }, []);
 
   const calculateIconTransform = (index) => {
-    if (!isMouseInSection) return { x: 0, y: 0, rotateX: 0, rotateY: 0, scale: 1 };
+    if (!isMouseInSection) return { rotateX: 0, rotateY: 0 };
 
-    const cardRefs = document.querySelectorAll('.achievement-card');
-    if (!cardRefs[index]) return { x: 0, y: 0, rotateX: 0, rotateY: 0, scale: 1 };
+    const iconElement = document.querySelector(`.achievement-icon-${index}`);
+    if (!iconElement) return { rotateX: 0, rotateY: 0 };
 
-    const cardRect = cardRefs[index].getBoundingClientRect();
+    const iconRect = iconElement.getBoundingClientRect();
     const sectionRect = sectionRef.current?.getBoundingClientRect();
 
-    if (!sectionRect) return { x: 0, y: 0, rotateX: 0, rotateY: 0, scale: 1 };
+    if (!sectionRect) return { rotateX: 0, rotateY: 0 };
 
-    const cardCenterX = cardRect.left - sectionRect.left + cardRect.width / 2;
-    const cardCenterY = cardRect.top - sectionRect.top + cardRect.height / 2;
+    const iconCenterX = iconRect.left - sectionRect.left + iconRect.width / 2;
+    const iconCenterY = iconRect.top - sectionRect.top + iconRect.height / 2;
 
-    const deltaX = mousePosition.x - cardCenterX;
-    const deltaY = mousePosition.y - cardCenterY;
+    const deltaX = mousePosition.x - iconCenterX;
+    const deltaY = mousePosition.y - iconCenterY;
 
-    const angle = Math.atan2(deltaY, deltaX);
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    const maxDistance = 400;
-    const movementFactor = Math.min(distance / maxDistance, 1);
+    const rotateY = (deltaX / iconRect.width) * 15;
+    const rotateX = -(deltaY / iconRect.height) * 15;
 
-    const moveX = Math.cos(angle) * movementFactor * 20;
-    const moveY = Math.sin(angle) * movementFactor * 20;
-
-    const rotateY = (deltaX / cardRect.width) * 25;
-    const rotateX = -(deltaY / cardRect.height) * 25;
-
-    const scale = 1 + movementFactor * 0.1;
-
-    return { x: moveX, y: moveY, rotateX, rotateY, scale };
+    return { rotateX, rotateY };
   };
 
   const containerVariants = {
@@ -136,7 +126,7 @@ export default function KeyAchievementsSection() {
     <section
       ref={sectionRef}
       className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50"
-      style={{ perspective: '2000px' }}
+      style={{ perspective: '1000px' }}
     >
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
@@ -171,7 +161,7 @@ export default function KeyAchievementsSection() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12"
         >
           {achievements.map((achievement, index) => {
             const transform = calculateIconTransform(index);
@@ -180,124 +170,51 @@ export default function KeyAchievementsSection() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="achievement-card relative group"
-                style={{ transformStyle: 'preserve-3d' }}
+                className="achievement-card flex flex-col items-center text-center"
               >
                 <motion.div
-                  animate={
-                    isMouseInSection
-                      ? {
-                          rotateX: transform.rotateX * 0.3,
-                          rotateY: transform.rotateY * 0.3,
-                          z: transform.scale * 20,
-                        }
-                      : { rotateX: 0, rotateY: 0, z: 0 }
-                  }
-                  transition={{
-                    type: 'spring',
-                    stiffness: 100,
-                    damping: 20,
-                    mass: 0.8,
-                  }}
-                  className="bg-white rounded-2xl p-8 h-full flex flex-col items-center justify-center text-center relative overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300"
+                  className={`achievement-icon-${index} mb-6 w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center`}
                   style={{
                     transformStyle: 'preserve-3d',
                   }}
-                >
-                  <motion.div
-                    animate={
-                      isMouseInSection
-                        ? {
-                            x: transform.x,
-                            y: transform.y,
-                            scale: transform.scale,
-                            rotateY: transform.rotateY,
-                            rotateX: transform.rotateX,
-                            z: 50,
-                          }
-                        : { x: 0, y: 0, scale: 1, rotateY: 0, rotateX: 0, z: 0 }
-                    }
-                    transition={{
-                      type: 'spring',
-                      stiffness: 120,
-                      damping: 15,
-                      mass: 0.5,
-                    }}
-                    className="mb-6 relative z-10"
-                    style={{
-                      transformStyle: 'preserve-3d',
-                      filter: isMouseInSection
-                        ? `drop-shadow(0 ${transform.y * 0.5}px ${transform.scale * 20}px rgba(239, 68, 68, 0.3))`
-                        : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))',
-                    }}
-                  >
-                    <div className="w-20 h-20 sm:w-24 sm:h-24 relative">
-                      <motion.div
-                        animate={
-                          isMouseInSection
-                            ? {
-                                rotateZ: transform.rotateY * 0.2,
-                              }
-                            : { rotateZ: 0 }
+                  animate={
+                    isMouseInSection
+                      ? {
+                          rotateX: transform.rotateX,
+                          rotateY: transform.rotateY,
                         }
-                        transition={{
-                          type: 'spring',
-                          stiffness: 100,
-                          damping: 12,
-                        }}
-                        className="absolute inset-0 rounded-full bg-gradient-to-br from-red-100 to-pink-100 opacity-30 blur-xl"
-                        style={{ transform: 'translateZ(-20px)' }}
-                      />
-                      <img
-                        src={achievement.icon}
-                        alt={achievement.label}
-                        className="w-full h-full object-contain relative z-10"
-                        style={{
-                          transform: 'translateZ(30px)',
-                          transformStyle: 'preserve-3d',
-                        }}
-                      />
-                    </div>
-                  </motion.div>
-
-                  <div
-                    className="space-y-2"
+                      : { rotateX: 0, rotateY: 0 }
+                  }
+                  transition={{
+                    type: 'spring',
+                    stiffness: 200,
+                    damping: 20,
+                    mass: 0.5,
+                  }}
+                >
+                  <img
+                    src={achievement.icon}
+                    alt={achievement.label}
+                    className="w-full h-full object-contain"
                     style={{
-                      transform: 'translateZ(20px)',
-                      transformStyle: 'preserve-3d',
+                      filter: 'drop-shadow(0 10px 20px rgba(239, 68, 68, 0.15))',
                     }}
-                  >
-                    <h3 className="text-2xl sm:text-3xl font-black text-gray-900">
-                      {achievement.stat}
-                      {achievement.subtitle && (
-                        <span className="block text-xl font-bold text-gray-700 mt-1">
-                          {achievement.subtitle}
-                        </span>
-                      )}
-                    </h3>
-                    <p className="text-base text-gray-600 font-medium">
-                      {achievement.label}
-                    </p>
-                  </div>
-
-                  <motion.div
-                    animate={
-                      isMouseInSection
-                        ? {
-                            opacity: 0.1,
-                            scale: 1.2,
-                          }
-                        : { opacity: 0, scale: 1 }
-                    }
-                    className="absolute inset-0 bg-gradient-to-br from-red-500 via-pink-500 to-transparent rounded-2xl"
-                    style={{ transform: 'translateZ(-10px)' }}
-                  />
-
-                  <div
-                    className="absolute inset-0 bg-gradient-to-br from-red-500/0 via-transparent to-transparent group-hover:from-red-500/5 transition-all duration-500 rounded-2xl"
-                    style={{ transform: 'translateZ(5px)' }}
                   />
                 </motion.div>
+
+                <div className="space-y-2">
+                  <h3 className="text-2xl sm:text-3xl font-black text-gray-900">
+                    {achievement.stat}
+                    {achievement.subtitle && (
+                      <span className="block text-xl font-bold text-gray-700 mt-1">
+                        {achievement.subtitle}
+                      </span>
+                    )}
+                  </h3>
+                  <p className="text-base text-gray-600 font-medium">
+                    {achievement.label}
+                  </p>
+                </div>
               </motion.div>
             );
           })}
