@@ -56,20 +56,12 @@ const Navigation = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "glass-card border-b border-gray-200 dark:border-white/10"
-            : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 shadow-sm"
         role="navigation"
         aria-label="Main navigation"
       >
         <div className="container mx-auto px-4 sm:px-6">
-          <div
-            className={`flex items-center justify-between transition-all duration-300 ${
-              isScrolled ? "h-16" : "h-20"
-            }`}
-          >
+          <div className="flex items-center justify-between h-16">
             <motion.button
               onClick={() => handleNavigation("/")}
               whileHover={{ scale: 1.05 }}
@@ -79,36 +71,34 @@ const Navigation = () => {
               <img
                 src="/logo.png"
                 alt="Tolaram Logo"
-                className={`object-contain transition-all duration-300 ${
-                  isScrolled ? "h-10" : "h-14"
-                }`}
+                className="h-10 object-contain"
               />
             </motion.button>
 
-            <div className="flex items-center gap-4">
-              <div className="hidden lg:flex items-center gap-2">
-                {navigationLinks.map((link) => (
-                  <motion.button
-                    key={link.path}
-                    onClick={() => handleNavigation(link.path)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 ${
-                      location.pathname === link.path
-                        ? "bg-red-500 text-white"
-                        : "glass-card text-gray-800 dark:text-white hover:border-red-500/50 border border-gray-300 dark:border-white/20"
-                    }`}
-                  >
-                    {link.name}
-                  </motion.button>
-                ))}
-              </div>
+            <div className="hidden lg:flex items-center justify-center gap-2 flex-1 px-8">
+              {navigationLinks.map((link) => (
+                <motion.button
+                  key={link.path}
+                  onClick={() => handleNavigation(link.path)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`px-4 py-2 rounded-full font-medium text-sm whitespace-nowrap transition-all duration-300 ${
+                    location.pathname === link.path
+                      ? "bg-red-500 text-white"
+                      : "bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-red-950/30 border border-gray-200 dark:border-gray-700"
+                  }`}
+                >
+                  {link.name}
+                </motion.button>
+              ))}
+            </div>
 
+            <div className="flex items-center gap-2">
               <motion.button
                 onClick={toggleTheme}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2 rounded-full bg-white/10 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 text-gray-800 dark:text-white hover:bg-white/20 dark:hover:bg-white/20 transition-all"
+                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all"
                 aria-label="Toggle theme"
               >
                 {theme === 'light' ? (
@@ -118,25 +108,11 @@ const Navigation = () => {
                 )}
               </motion.button>
 
-              {!isHome && (
-                <motion.button
-                  onClick={() => handleNavigation("/")}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="hidden sm:inline-flex lg:hidden glass-card-premium px-6 py-2 rounded-full font-semibold text-gray-800 dark:text-white hover:border-red-500/50 transition-all duration-300 items-center gap-2 border border-gray-300 dark:border-white/20"
-                >
-                  <Home className="w-4 h-4" />
-                  <span>Home</span>
-                </motion.button>
-              )}
-
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="lg:hidden p-2 rounded-full bg-white/10 dark:bg-white/10 backdrop-blur-sm border border-gray-300 dark:border-white/20 text-gray-800 dark:text-white z-50"
+                className="lg:hidden p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 z-50"
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? (

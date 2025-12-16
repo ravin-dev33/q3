@@ -15,6 +15,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Particles from "../components/Particles";
+import HeroSection from "../chapters/HeroSection";
 import HighlightsSection from "../chapters/HighlightsSection";
 import KeyAchievementsSection from "../chapters/KeyAchievementsSection";
 
@@ -152,112 +153,70 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Particles Background */}
-      <Particles className="absolute inset-0 z-0" quantity={100} />
-
       {/* Hero Section */}
-      <section className="relative py-32 px-6 overflow-hidden">
-        {/* Video Background */}
-        <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover opacity-30"
+      <HeroSection />
+
+      {/* Three Stages Section */}
+      <section className="relative py-16 px-6 bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-12 text-gray-900 dark:text-white"
           >
-            <source src="/hero_bg.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/80 via-gray-900/60 to-gray-900" />
+            THE THREE STAGES OF DIGITAL GROWTH
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Digitisation ?",
+                description: "Converting analog information into digital format",
+              },
+              {
+                title: "Digitalisation ?",
+                description: "Using digital technologies to change business processes",
+              },
+              {
+                title: "Digital Transformation ?",
+                description: "Fundamental rethinking of how an organization uses technology",
+              },
+            ].map((stage, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                whileHover={{ y: -8 }}
+                className="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 cursor-pointer group relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <h3 className="text-xl md:text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-3">
+                  <span className="w-3 h-3 bg-red-500 rounded-full" />
+                  {stage.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-8">
+                  {stage.description}
+                </p>
+                <div className="flex justify-end">
+                  <motion.div
+                    whileHover={{ scale: 1.1, x: 5 }}
+                    className="w-12 h-12 rounded-full border-2 border-red-500 flex items-center justify-center text-red-500 group-hover:bg-red-500 group-hover:text-white transition-colors duration-300"
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="max-w-6xl mx-auto text-center relative z-10"
-        >
-          {/* Logo/Brand */}
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="mb-8 inline-block"
-          >
-            <div className="glass-card-premium p-6 rounded-3xl">
-              <img
-                src="/logo.png"
-                alt="Tolaram Logo"
-                className="h-20 w-auto mx-auto"
-              />
-            </div>
-          </motion.div>
-
-          {/* Main Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-4xl sm:text-5xl md:text-7xl font-black leading-tight mb-6"
-          >
-            <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
-              TOLARAM
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-red-400 via-red-500 to-red-600 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]">
-              DIGITALIZATION NEWSLETTER
-            </span>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 max-w-3xl mx-auto"
-          >
-            October 2025 Edition
-          </motion.p>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="text-base sm:text-lg text-gray-400 max-w-4xl mx-auto leading-relaxed"
-          >
-            Discover our journey of digital transformation, innovation, and
-            excellence across all business verticals. Explore our achievements,
-            implementations, and future-ready initiatives.
-          </motion.p>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
-            className="mt-12"
-          >
-            <button
-              onClick={() => {
-                document
-                  .getElementById("chapters")
-                  .scrollIntoView({ behavior: "smooth" });
-              }}
-              className="glass-card-premium px-8 py-4 rounded-full font-bold text-white hover:scale-105 transition-transform duration-300 inline-flex items-center gap-3 border-2 border-red-500/30"
-            >
-              Explore Chapters
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* Key Achievements Section */}
       <KeyAchievementsSection />
-
-      {/* Highlights Section */}
-      <HighlightsSection />
 
       {/* Chapters Grid Section */}
       <section id="chapters" className="relative py-16 px-6">
